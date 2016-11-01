@@ -1,5 +1,5 @@
 //Upgrader role is required for later.
-var roleBuilder = require('role.builder');
+var roleWallFixer = require('role.wallfixer')
 
 module.exports = {
     run: function(creep){
@@ -31,7 +31,7 @@ module.exports = {
        
                     //If cannot build, act as upgrader (prevents downtime)
                     else {
-                    roleBuilder.run(creep);    
+                    roleWallFixer.run(creep);    
         }
    }
    //Otherwise if the creep has no energy it will attempt to pick some up at a container
