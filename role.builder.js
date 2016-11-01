@@ -29,7 +29,7 @@ module.exports = {
    }    
         // Otherwise go back to gather energy
         else {
-        var source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+        var source = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
         if(creep.pickup(source) == ERR_NOT_IN_RANGE) {
             creep.moveTo(source);
         }

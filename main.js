@@ -1,5 +1,5 @@
 //Import Modules Here
-Game.cpu.getUsed(
+
 require('prototype.spawn.guard')();
 require('prototype.spawn.healer')();
 require('prototype.spawn')();
@@ -31,9 +31,6 @@ module.exports.loop = function () {
     //creep.say(creep) 
  
     //Creeps check their role and then run the respective role function
-    /*if (creep.memory.role == 'harvester') {
-    roleHarvester.run(creep);
-    }*/
     if (creep.memory.role == 'upgrader') {
     roleUpgrader.run(creep);
     }
@@ -98,16 +95,7 @@ module.exports.loop = function () {
     
     //Spawns roles based on current % pop, miners are spawned to fill room source slots
     
-    /*if (numberOfHarvesters < 1){
-    var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'harvester')
-
-        // if spawning failed and we have no harvesters left
-        if (name == ERR_NOT_ENOUGH_ENERGY && numberOfHarvesters == 0) {
-            // spawn one with what is available
-            var name = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], {role: 'harvester', working: false});
-        }
-        }*/
-    if (numberOfMiners < 5){
+    if (numberOfMiners < ((population.length)*0.10)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'miner');
     // if spawning failed and we have no harvesters left
         if (name == ERR_NOT_ENOUGH_ENERGY && numberOfMiners == 0) {
@@ -136,7 +124,7 @@ module.exports.loop = function () {
     else if (numberOfWallFixers < ((population.length)*0.15)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'wallfixer');
     }
-     else if (numberOfBuilders < ((population.length)*0.10)){
+     else if (numberOfBuilders < ((population.length)*0.15)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'builder');
     }
     /*else if (numberOfArchers < ((population.length)*0.10)){
@@ -169,4 +157,4 @@ module.exports.loop = function () {
     }
 
 };
-)
+
