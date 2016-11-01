@@ -4,7 +4,7 @@ module.exports = {
     var danger = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS)
     var spawn = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_SPAWN})
     var rampart = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART})
-    var healer = creep.pos.findClosestByPath(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'healer'})
+   
      //If danger is not present the creep will stop defending     
     if (creep.memory.working == true && danger == undefined) {
         creep.memory.working = false

@@ -5,6 +5,9 @@ module.exports = {
     //Find all structures with energy storage
         var structure = creep.pos.findClosestByPath (FIND_MY_STRUCTURES, 
                                                     {filter: (s) => s.energy < s.energyCapacity && s.structureType == STRUCTURE_TOWER})
+                                                    
+        var activecontainer = creep.pos.findClosestByPath (FIND_STRUCTURES, 
+                                                {filter: (s) => s.structureType == STRUCTURE_CONTAINER && _.sum(s.store) > 0})
     
     //If all storages are full of energy harvesters work as builders
     if (structure == undefined){
@@ -23,6 +26,12 @@ module.exports = {
     if (creep.memory.working == true){
             if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(structure);
+        }
+    }
+    //Otherwise if the creep has no energy it will attempt to pick some up at a container
+     else if (activecontainer != undefined) {
+        if(creep.withdraw(activecontainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(activecontainer);
         }
     }
     // Otherwise the creep will attempt to gather resources

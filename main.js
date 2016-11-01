@@ -3,7 +3,7 @@
 require('prototype.spawn.guard')();
 require('prototype.spawn.healer')();
 require('prototype.spawn')();
-//var roleHarvester = require('role.harvester');
+
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleFixer = require('role.fixer');
@@ -31,6 +31,7 @@ module.exports.loop = function () {
     //creep.say(creep) 
  
     //Creeps check their role and then run the respective role function
+
     if (creep.memory.role == 'upgrader') {
     roleUpgrader.run(creep);
     }
@@ -73,7 +74,6 @@ module.exports.loop = function () {
 
     //Checks for the number of each creeps of each role.
 
-    //var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
     
     var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
 
@@ -95,7 +95,7 @@ module.exports.loop = function () {
     
     //Spawns roles based on current % pop, miners are spawned to fill room source slots
     
-    if (numberOfMiners < ((population.length)*0.10)){
+    if (numberOfMiners <= ((population.length)*0.2)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'miner');
     // if spawning failed and we have no harvesters left
         if (name == ERR_NOT_ENOUGH_ENERGY && numberOfMiners == 0) {
@@ -115,22 +115,19 @@ module.exports.loop = function () {
     else if (numberOfHealers < ((population.length)*0.05)) {
     var name = Game.spawns.Spawn1.createCustomHealerCreep (energy, 'healer');
     }
+    else if (numberOfBuilders < ((population.length)*0.10)){
+    var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'builder');
+    }
     else if (numberOfSuppliers < ((population.length)*0.1)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'supplier');
     }
      else if (numberOfFixers < ((population.length)*0.15)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'fixer');
     }
-    else if (numberOfWallFixers < ((population.length)*0.15)){
+    else if (numberOfWallFixers < ((population.length)*0.10)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'wallfixer');
     }
-     else if (numberOfBuilders < ((population.length)*0.15)){
-    var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'builder');
-    }
-    /*else if (numberOfArchers < ((population.length)*0.10)){
-    var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'builder');
-    }*/
-   
+     
     
   //Find all towers in the room
     var towers = Game.spawns.Spawn1.room.find(FIND_STRUCTURES, {
