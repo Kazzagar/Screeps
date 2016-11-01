@@ -1,5 +1,5 @@
 //Import Modules Here
-
+Game.cpu.getUsed(
 require('prototype.spawn.guard')();
 require('prototype.spawn.healer')();
 require('prototype.spawn')();
@@ -109,8 +109,13 @@ module.exports.loop = function () {
         }*/
     if (numberOfMiners < 5){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'miner');
+    // if spawning failed and we have no harvesters left
+        if (name == ERR_NOT_ENOUGH_ENERGY && numberOfMiners == 0) {
+            // spawn one with what is available
+            var name = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], {role: 'miner', working: false});
+        }
     }
-    else if (numberOfTransit < ((population.length)*0.15)){
+    else if (numberOfTransit < ((population.length)*0.10)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy, 'transit');
     }
     else if (numberOfUpgraders < ((population.length)*0.15)){
@@ -125,7 +130,7 @@ module.exports.loop = function () {
     else if (numberOfSuppliers < ((population.length)*0.1)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'supplier');
     }
-     else if (numberOfFixers < ((population.length)*0.2)){
+     else if (numberOfFixers < ((population.length)*0.15)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'fixer');
     }
     else if (numberOfWallFixers < ((population.length)*0.15)){
@@ -164,4 +169,4 @@ module.exports.loop = function () {
     }
 
 };
-
+)

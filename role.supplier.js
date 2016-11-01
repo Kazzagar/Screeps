@@ -1,4 +1,4 @@
-var roleTransit = require('role.transit');
+var roleBuilder = require('role.builder');
 module.exports = {
     run: function(creep){
         
@@ -8,7 +8,7 @@ module.exports = {
     
     //If all storages are full of energy harvesters work as builders
     if (structure == undefined){
-    roleTransit.run(creep);    
+    roleBuilder.run(creep);    
     }
     
     //Check whether the creep has finished working   
