@@ -22,7 +22,7 @@ module.exports = {
             var target = undefined;
 
             // loop with increasing percentages
-            for (let percentage = 0.0001; percentage <= 1; percentage = percentage + 0.0001){
+            for (let percentage = 0.05; percentage <= 1; percentage = percentage + 0.05){
                 // find a wall with less than percentage hits
 
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
