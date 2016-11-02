@@ -1,6 +1,6 @@
 //Upgrader role is required for later.
 var roleBuilder = require('role.builder');
-
+var target = require('wall.manager')
 module.exports = {
     run: function(creep){
         
