@@ -19,8 +19,9 @@ module.exports = {
    if (creep.memory.working == true){
        //Creep defines closest damaged building. (Not walls, as walls have millions of hp and will be impossible to fully repair)
        var damaged = creep.pos.findClosestByPath(FIND_STRUCTURES,
-                                                    {filter: (s) => s.hits < ((s.hitsMax)*0.75) && s.structureType != STRUCTURE_WALL ||
-                                                        s.hits < ((s.hitsMax)*0.90) && s.structureType == STRUCTURE_RAMPART
+                                                    {filter: (s) => s.hits < ((s.hitsMax)*0.75) && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_ROAD ||
+                                                        s.hits < ((s.hitsMax)*0.90) && s.structureType == STRUCTURE_RAMPART ||
+                                                        s.hits < ((s.hitsMax)*0.60) && s.structureType == STRUCTURE_ROAD
                                                     });
         
         if (damaged != undefined) {

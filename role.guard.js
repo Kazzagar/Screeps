@@ -21,7 +21,7 @@ module.exports = {
     }
     //Otherwise it will attempt to move to the nearest rampart (this is super lazy but was needed to stop spawn blocking)
     else {
-        creep.moveTo(rampart)
+        creep.moveTo(Game.flags.Rally)
     }
 }
 };
