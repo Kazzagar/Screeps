@@ -21,8 +21,11 @@ module.exports = {
         }
     }
     //Otherwise move to the nearest guard
-    else {
+    else if (guard != undefined) {
         creep.moveTo(guard)
 }
+    else {
+        creep.moveTo(Game.flags.Home)
+    }
 }
 };

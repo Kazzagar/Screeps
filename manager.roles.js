@@ -8,9 +8,10 @@ var roleHealer = require('role.healer');
 var roleTransit = require('role.transit');
 var roleMiner = require('role.miner');
 
+
 module.exports = {
     
-     run : function(currentRoom) {
+     run : function() {
          
     //Searches for creep names and then defines the variable creep as each independent creep
     for (let name in Game.creeps) {
@@ -45,6 +46,7 @@ module.exports = {
     else if (creep.memory.role == 'miner') {
     roleMiner.run(creep);
     }
+    
     }
 }
 

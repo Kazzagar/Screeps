@@ -42,8 +42,10 @@ require('prototype.spawn')();
     
     var numberOfMiners = _.sum(Game.creeps, (c) => c.memory.role == 'miner');
     
-    //Miners are spawned to fill room source slots. Spawns roles based on current % pop after this
+    var numberOfColonyHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'colony.harvester');
     
+    //Miners are spawned to fill room source slots. Spawns roles based on current % pop after this
+    (numberOfMiners + numberOfColonyHarvesters)
     if (numberOfMiners < 4) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'miner');
     // if spawning failed and we have no harvesters left
@@ -52,28 +54,31 @@ require('prototype.spawn')();
             var name = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], {role: 'miner', working: false});
         }
     }
-    else if (numberOfTransit <= (((population.length)-4)*0.2)) {
+    else if (numberOfColonyHarvesters < 4 && Game.flags.Colony != undefined) {
+    var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy, 'colony.harvester');
+    }
+    else if (numberOfTransit < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.2)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy, 'transit');
     }
-    else if (numberOfUpgraders < (((population.length)-4)*0.15)) {
+    else if (numberOfUpgraders < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.15)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'upgrader');
     }
-    else if (numberOfGuards < (((population.length)-4)*0.15)) {
+    else if (numberOfGuards < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.15)) {
     var name = Game.spawns.Spawn1.createCustomGuardCreep (energy, 'guard');
     }
-    else if (numberOfHealers < (((population.length)-4)*0.1)) {
+    else if (numberOfHealers < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.1)) {
     var name = Game.spawns.Spawn1.createCustomHealerCreep (energy, 'healer');
     }
-    else if (numberOfBuilders < (((population.length)-4)*0.1)) {
+    else if (numberOfBuilders < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.1)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'builder');
     }
-    else if (numberOfSuppliers < (((population.length)-4)*0.1)) {
+    else if (numberOfSuppliers < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.1)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'supplier');
     }
-     else if (numberOfFixers < (((population.length)-4)*0.15)){
+     else if (numberOfFixers < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.15)){
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'fixer');
     }
-    else if (numberOfWallFixers < (((population.length)-4)*0.5)) {
+    else if (numberOfWallFixers < (((population.length)-(numberOfMiners + numberOfColonyHarvesters))*0.5)) {
     var name = Game.spawns.Spawn1.createCustomBalancedCreep (energy,'wallfixer');
     }
      
