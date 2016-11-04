@@ -14,11 +14,14 @@ module.exports = {
     else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
         creep.memory.working = true
     }
-    //If the creep is set to work it will attempt to drop energy to a container.
+    //If the creep is set to work it will attempt to drop energy.
     if (creep.memory.working == true && container != undefined && transit > 0){
             if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(container);
             }
+        }
+    else if (creep.memory.working == true && container == undefined && transit > 0){
+            creep.drop(RESOURCE_ENERGY)
         }
     //Otherwise the failsafe activates and the creep delivers itself
     else if (creep.memory.working == true) {

@@ -12,6 +12,8 @@ run : function(currentRoom) {
                                                 {filter: (c) => c.hits < c.hitsMax})
         var damaged = tower.pos.findClosestByPath(FIND_STRUCTURES,
                                                     {filter: (s) => s.hits < ((s.hitsMax)*0.05) && s.structureType != STRUCTURE_WALL });
+        var damagedwall = tower.pos.findClosestByPath(FIND_STRUCTURES,
+                                                    {filter: (s) => s.hits < ((s.hitsMax)*0.0001) && s.structureType == STRUCTURE_WALL });
         //Tower will prioritise attacking, then healing, and then repairing
         if (target != undefined) {
             tower.attack(target)
@@ -21,6 +23,9 @@ run : function(currentRoom) {
         }
         else if (damaged != undefined) {
             tower.repair(damaged)
+        } 
+        else if (damagedwall != undefined) {
+            tower.repair(damagedwall)
         }    
 }
 }

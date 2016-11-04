@@ -1,7 +1,7 @@
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleFixer = require('role.fixer');
-var roleWallFixer = require('role.wallfixer');
+//var roleWallFixer = require('role.wallfixer');
 var roleSupplier = require('role.supplier');
 var roleGuard = require('role.guard');
 var roleHealer = require('role.healer');
@@ -28,9 +28,9 @@ module.exports = {
     else if (creep.memory.role == 'fixer') {
     roleFixer.run(creep);
     }
-    else if (creep.memory.role == 'wallfixer') {
+    /*else if (creep.memory.role == 'wallfixer') {
     roleWallFixer.run(creep);
-    }
+    }*/
     else if (creep.memory.role == 'supplier') {
     roleSupplier.run(creep);
     }

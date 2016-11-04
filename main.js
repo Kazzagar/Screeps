@@ -5,12 +5,11 @@ var managerdeath = require ('manager.death')
 var managerroles = require ('manager.roles')
 var managercolony = require ('manager.colony')
 //Define our rooms
-let currentRoom  = _.filter(Game.rooms, (room) => room.controller.my)
-//let colonyRoom = 
+let homeRooms  = _.filter(Game.rooms, (room) => room.controller.my)
 
 //Run logic in all of owned rooms
-managerspawn.run(currentRoom);
-managertowers.run(currentRoom);
-managerdeath.run(currentRoom);
-managerroles.run(currentRoom);
+managerspawn.run(homeRooms);
+managertowers.run(homeRooms);
+managerdeath.run(Game.rooms);
+managerroles.run(Game.rooms);
 managercolony.run(Game.rooms);

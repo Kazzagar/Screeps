@@ -25,7 +25,7 @@ module.exports = {
         creep.moveTo(guard)
 }
     else {
-        creep.moveTo(Game.flags.Home)
+        creep.moveTo(Game.flags.Rally)
     }
 }
 };
